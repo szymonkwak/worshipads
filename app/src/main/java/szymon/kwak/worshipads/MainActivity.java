@@ -1,27 +1,19 @@
 package szymon.kwak.worshipads;
 
-import android.content.Context;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -41,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     Button[] Buttons = new Button[12];
 
     AudioManager am;
-    MediaPlayer mpC, mpD, mpE;
+    MediaPlayer mpC, mpDb, mpD, mpEb, mpE, mpF, mpGb, mpG, mpAb, mpA, mpBb, mpB;
     List<MediaPlayer> playersList = new ArrayList<>();
 
     int maxVolume;
@@ -66,6 +58,9 @@ public class MainActivity extends AppCompatActivity {
         if (am != null) {
             maxVolume = am.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
 
+            creatempplayingList();
+
+
             Buttons[0] = findViewById(R.id.btnC);
             Buttons[1] = findViewById(R.id.btnDb);
             Buttons[2] = findViewById(R.id.btnD);
@@ -78,34 +73,66 @@ public class MainActivity extends AppCompatActivity {
             Buttons[9] = findViewById(R.id.btnA);
             Buttons[10] = findViewById(R.id.btnBb);
             Buttons[11] = findViewById(R.id.btnB);
-            mpplayingList.add(playingC);
-            mpplayingList.add(playingDb);
-            mpplayingList.add(playingD);
-            mpplayingList.add(playingEb);
-            mpplayingList.add(playingE);
-            mpplayingList.add(playingF);
-            mpplayingList.add(playingGb);
-            mpplayingList.add(playingG);
-            mpplayingList.add(playingAb);
-            mpplayingList.add(playingA);
-            mpplayingList.add(playingBb);
-            mpplayingList.add(playingB);
 
-            //inicjalizacja MediaPlayer'ów i dodanie ich do listy 'playersList'
-            //mpC = MediaPlayer.create(this, R.raw.cmaj);
-            //mpD = MediaPlayer.create(this, R.raw.dmaj);
-            //mpE = MediaPlayer.create(this, R.raw.emaj);
+            mpC = new MediaPlayer();
+            mpDb = new MediaPlayer();
+            mpD = new MediaPlayer();
+            mpEb = new MediaPlayer();
+            mpE = new MediaPlayer();
+            mpF = new MediaPlayer();
+            mpGb = new MediaPlayer();
+            mpG = new MediaPlayer();
+            mpAb = new MediaPlayer();
+            mpA = new MediaPlayer();
+            mpAb = new MediaPlayer();
+            mpBb = new MediaPlayer();
+            mpB = new MediaPlayer();
+
+            playersList.add(mpC); playersList.add(mpDb); playersList.add(mpD); playersList.add(mpEb);
+            playersList.add(mpE); playersList.add(mpF); playersList.add(mpGb); playersList.add(mpG);
+            playersList.add(mpAb); playersList.add(mpA); playersList.add(mpBb); playersList.add(mpB);
+
 
             tv1 = findViewById(R.id.textView);
             tv2 = findViewById(R.id.textView2);
 
-
-            mpC = new MediaPlayer(); mpD = new MediaPlayer(); mpE = new MediaPlayer();
-            playersList.add(mpC); playersList.add(mpD); playersList.add(mpE);
-
-
-
         }
+    }
+
+    public void createPlayersList(){
+
+        mpC = new MediaPlayer();
+        mpDb = new MediaPlayer();
+        mpD = new MediaPlayer();
+        mpEb = new MediaPlayer();
+        mpE = new MediaPlayer();
+        mpF = new MediaPlayer();
+        mpGb = new MediaPlayer();
+        mpG = new MediaPlayer();
+        mpAb = new MediaPlayer();
+        mpA = new MediaPlayer();
+        mpAb = new MediaPlayer();
+        mpBb = new MediaPlayer();
+        mpB = new MediaPlayer();
+
+        playersList.add(mpC); playersList.add(mpDb); playersList.add(mpD); playersList.add(mpEb);
+        playersList.add(mpE); playersList.add(mpF); playersList.add(mpGb); playersList.add(mpG);
+        playersList.add(mpAb); playersList.add(mpA); playersList.add(mpBb); playersList.add(mpB);
+
+    }
+    public void creatempplayingList(){
+        mpplayingList.add(playingC);
+        mpplayingList.add(playingDb);
+        mpplayingList.add(playingD);
+        mpplayingList.add(playingEb);
+        mpplayingList.add(playingE);
+        mpplayingList.add(playingF);
+        mpplayingList.add(playingGb);
+        mpplayingList.add(playingG);
+        mpplayingList.add(playingAb);
+        mpplayingList.add(playingA);
+        mpplayingList.add(playingBb);
+        mpplayingList.add(playingB);
     }
 
 
@@ -137,12 +164,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    //https://stackoverflow.com/questions/38380495/android-studio-mediaplayer-how-to-fade-in-and-out
     public void fadeIn(final MediaPlayer mediaPlayer, int padResId) {
-        final int FADE_DURATION = 20000;
+        //https://stackoverflow.com/questions/38380495/android-studio-mediaplayer-how-to-fade-in-and-out
+        final int FADE_DURATION = 15000;
         final int FADE_INTERVAL = 200;
         int numberOfSteps = FADE_DURATION / FADE_INTERVAL;
-        int currentVolume = am.getStreamVolume(AudioManager.STREAM_MUSIC); //pobierz aktualną głośność z urządzenia
+        final int currentVolume = am.getStreamVolume(AudioManager.STREAM_MUSIC); //pobierz aktualną głośność z urządzenia
 
         volIn = 0.0f;
         final float deltaVolume = (currentVolume / (float) maxVolume) / (float) numberOfSteps;
@@ -164,10 +191,14 @@ public class MainActivity extends AppCompatActivity {
             final Runnable runnable1 = new Runnable() {
                 @Override
                 public void run() {
+                    if (volIn >= (currentVolume / (float) maxVolume)){
+                        return; //zatrzymuje run() runnable
+                    }
                  mediaPlayer.setVolume(volIn, volIn);
                  volIn = volIn + deltaVolume;
                  h1.postDelayed(this, FADE_INTERVAL);
                  tv1.setText((String.valueOf(volIn)));
+
                 }
             };
             runnable1.run();
@@ -175,7 +206,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void fadeOut(){
-        final int FADE_DURATION = 15000;
+        final int FADE_DURATION = 12000;
         final int FADE_INTERVAL = 200;
         int numberOfSteps = FADE_DURATION/FADE_INTERVAL;
         int currentVolume = am.getStreamVolume(AudioManager.STREAM_MUSIC); //pobierz aktualną głośność z urządzenia
@@ -195,6 +226,7 @@ public class MainActivity extends AppCompatActivity {
                         if (volOut <= 0) {
                             playersList.get(j).stop();
                             playersList.get(j).reset();
+                            return; //zatrzymuje run() runnable
                         }
                         h2.postDelayed(this,FADE_INTERVAL);
                         tv2.setText((String.valueOf(volOut)));
@@ -205,6 +237,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
 
 
     //ustawia kolor wszystkich Buttonów w tablicy na 'unclicked'
@@ -245,105 +278,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-
-    /**
-
-     //ten runnable wycisza MadiaPlayer'a
-
-     Runnable runnable = new Runnable() {
-    @Override
-    public void run() {
-
-    currentVolume = am.getStreamVolume(AudioManager.STREAM_MUSIC); //pobierz aktualną głośność z urządzenia
-    vol = currentVolume/maxVolume;
-    vol = vol - 0.1f;
-    mp.setVolume(vol,vol);
-    mHandler.postDelayed(runnable,100); //odczekaj pół sekundy (500) i powtórz
-    }
-    };
-
-     */
-
-
 }
 
-
-/*
-    public void fadeOut(){
-        final int FADE_DURATION = 20000;
-        final int FADE_INTERVAL = 200;
-        int numberOfSteps = FADE_DURATION/FADE_INTERVAL;
-
-        currentVolume = am.getStreamVolume(AudioManager.STREAM_MUSIC); //pobierz aktualną głośność z urządzenia
-        vol = currentVolume/(float)maxVolume;
-        final float deltaVolume = vol / (float)numberOfSteps;
-
-        //ta pętla przeszukuje w Liście 'playersList' który MediaPlayer aktualnie gra, i tego właśnie wycisza.
-        for (int i = 0; i < playersList.size(); i++) {
-            if (playersList.get(i).isPlaying()) {
-                final int j = i;
-                Toast.makeText(this,"j: " + j,Toast.LENGTH_LONG).show();
-                final Timer timer2 = new Timer(true);
-                TimerTask timerTask2 = new TimerTask() {
-                    @Override
-                    public void run() {
-                        playersList.get(j).setVolume(vol, vol);
-                        vol = vol - deltaVolume;
-                        if (vol <= 0) {
-                            timer2.cancel();
-                            timer2.purge();
-                            playersList.get(j).stop();
-                        }
-                    }
-                };
-                timer2.schedule(timerTask2, FADE_INTERVAL, FADE_INTERVAL);
-            }
-        }
-
-    }
-
-
-
-    public void fadeIn(final MediaPlayer mediaPlayer){
-        final int FADE_DURATION = 20000;
-        final int FADE_INTERVAL = 200;
-        int numberOfSteps = FADE_DURATION/FADE_INTERVAL;
-
-        currentVolume = am.getStreamVolume(AudioManager.STREAM_MUSIC); //pobierz aktualną głośność z urządzenia
-        vol = 0;
-        final float deltaVolume = (currentVolume/(float)maxVolume) / (float)numberOfSteps;
-
-        mediaPlayer.setLooping(true);
-        mediaPlayer.seekTo(0);
-        mediaPlayer.start();
-
-        if (mediaPlayer.isPlaying()) {
-            Runnable runnable1 = new Runnable() {
-                @Override
-                public void run() {
-                    mediaPlayer.setVolume(vol, vol);
-                    vol = vol + deltaVolume;
-                    h1.postDelayed(this,FADE_INTERVAL);
-                }
-            };
-            runnable1.run();
-
-          /*
-            final Timer timer = new Timer(true);
-            TimerTask timerTask = new TimerTask() {
-                @Override
-                public void run() {
-                    mediaPlayer.setVolume(vol, vol);
-                    vol = vol + deltaVolume;
-                    if (vol >= currentVolume/(float)maxVolume) {
-                        timer.cancel();
-                        timer.purge();
-                    }
-                }
-            };
-            timer.schedule(timerTask, FADE_INTERVAL, FADE_INTERVAL);
-        */
 
 
 
