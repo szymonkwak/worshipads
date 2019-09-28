@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
     Handler h1 = new Handler();
     Handler h2 = new Handler();
 
-    TextView tv;
+    TextView tv1, tv2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,7 +96,8 @@ public class MainActivity extends AppCompatActivity {
             //mpD = MediaPlayer.create(this, R.raw.dmaj);
             //mpE = MediaPlayer.create(this, R.raw.emaj);
 
-            tv = findViewById(R.id.textView);
+            tv1 = findViewById(R.id.textView);
+            tv2 = findViewById(R.id.textView2);
 
 
             mpC = new MediaPlayer(); mpD = new MediaPlayer(); mpE = new MediaPlayer();
@@ -138,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
 
     //https://stackoverflow.com/questions/38380495/android-studio-mediaplayer-how-to-fade-in-and-out
     public void fadeIn(final MediaPlayer mediaPlayer, int padResId) {
-        final int FADE_DURATION = 15000;
+        final int FADE_DURATION = 20000;
         final int FADE_INTERVAL = 200;
         int numberOfSteps = FADE_DURATION / FADE_INTERVAL;
         int currentVolume = am.getStreamVolume(AudioManager.STREAM_MUSIC); //pobierz aktualną głośność z urządzenia
@@ -163,12 +164,10 @@ public class MainActivity extends AppCompatActivity {
             final Runnable runnable1 = new Runnable() {
                 @Override
                 public void run() {
-                    while (volIn <= 1.0)
-                        mediaPlayer.setVolume(volIn, volIn);
-                    volIn = volIn + deltaVolume;
-                    h1.postDelayed(this, FADE_INTERVAL);
-                    tv.setText((String.valueOf(volIn)));
-
+                 mediaPlayer.setVolume(volIn, volIn);
+                 volIn = volIn + deltaVolume;
+                 h1.postDelayed(this, FADE_INTERVAL);
+                 tv1.setText((String.valueOf(volIn)));
                 }
             };
             runnable1.run();
@@ -198,6 +197,7 @@ public class MainActivity extends AppCompatActivity {
                             playersList.get(j).reset();
                         }
                         h2.postDelayed(this,FADE_INTERVAL);
+                        tv2.setText((String.valueOf(volOut)));
                     }
                 };
                 runnable2.run();
