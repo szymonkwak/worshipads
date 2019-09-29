@@ -5,11 +5,13 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import java.text.SimpleDateFormat;
 
@@ -38,19 +40,36 @@ public class MainActivity extends AppCompatActivity {
     MediaPlayer mpC, mpDb, mpD, mpEb, mpE, mpF, mpGb, mpG, mpAb, mpA, mpBb, mpB;
     List<MediaPlayer> playersList = new ArrayList<>();
 
+
+    Handler hFadeIn = new Handler();
+    Handler hFadeOut = new Handler();
+    Handler hProgressB = new Handler();
+    Handler hClock = new Handler();
+
     int maxVolume;
     float volIn, volOut;
 
-    Handler h1 = new Handler();
-    Handler h2 = new Handler();
-    Handler hClock = new Handler();
-
     TextView textTime, tv1, tv2;
+    ProgressBar progressBarFadeIn;
 
     SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
     long date;
     String dateString;
 
+    private void creatempplayingList(){
+        mpplayingList.add(playingC);
+        mpplayingList.add(playingDb);
+        mpplayingList.add(playingD);
+        mpplayingList.add(playingEb);
+        mpplayingList.add(playingE);
+        mpplayingList.add(playingF);
+        mpplayingList.add(playingGb);
+        mpplayingList.add(playingG);
+        mpplayingList.add(playingAb);
+        mpplayingList.add(playingA);
+        mpplayingList.add(playingBb);
+        mpplayingList.add(playingB);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
         if (am != null) {
             maxVolume = am.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
 
+            progressBarFadeIn = findViewById(R.id.progressBarFadeIn);
             textTime = findViewById(R.id.textTime);
             createAndStartClock();
             creatempplayingList();
@@ -95,49 +115,15 @@ public class MainActivity extends AppCompatActivity {
             tv1 = findViewById(R.id.textView);
             tv2 = findViewById(R.id.textView2);
 
+
         }
     }
 
-    public void createPlayersList(){
-
-        mpC = new MediaPlayer();
-        mpDb = new MediaPlayer();
-        mpD = new MediaPlayer();
-        mpEb = new MediaPlayer();
-        mpE = new MediaPlayer();
-        mpF = new MediaPlayer();
-        mpGb = new MediaPlayer();
-        mpG = new MediaPlayer();
-        mpAb = new MediaPlayer();
-        mpA = new MediaPlayer();
-        mpAb = new MediaPlayer();
-        mpBb = new MediaPlayer();
-        mpB = new MediaPlayer();
-
-        playersList.add(mpC); playersList.add(mpDb); playersList.add(mpD); playersList.add(mpEb);
-        playersList.add(mpE); playersList.add(mpF); playersList.add(mpGb); playersList.add(mpG);
-        playersList.add(mpAb); playersList.add(mpA); playersList.add(mpBb); playersList.add(mpB);
-
-    }
-    public void creatempplayingList(){
-        mpplayingList.add(playingC);
-        mpplayingList.add(playingDb);
-        mpplayingList.add(playingD);
-        mpplayingList.add(playingEb);
-        mpplayingList.add(playingE);
-        mpplayingList.add(playingF);
-        mpplayingList.add(playingGb);
-        mpplayingList.add(playingG);
-        mpplayingList.add(playingAb);
-        mpplayingList.add(playingA);
-        mpplayingList.add(playingBb);
-        mpplayingList.add(playingB);
-    }
 
 
+    private void PlayStop (mpplaying mppl, Button b, MediaPlayer mediaPlayer, int padResId){
 
-
-    public void PlayStop (mpplaying mppl, Button b, MediaPlayer mediaPlayer, int padResId){
+        //mppl to "identyfikator" wciśniętego przycisku. Decyduje czy wykonuje się if czy else.
 
         if (!mppl.isPlayingX()){
             setAllMpplayingFalse(); //wszystkie 'czyGra' są false
@@ -163,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void fadeIn(final MediaPlayer mediaPlayer, int padResId) {
+    private void fadeIn(final MediaPlayer mediaPlayer, int padResId) {
         //https://stackoverflow.com/questions/38380495/android-studio-mediaplayer-how-to-fade-in-and-out
         final int FADE_DURATION = 15000;
         final int FADE_INTERVAL = 200;
@@ -173,17 +159,11 @@ public class MainActivity extends AppCompatActivity {
         volIn = 0.0f;
         final float deltaVolume = (currentVolume / (float) maxVolume) / (float) numberOfSteps;
 
+        progressBarFadeIn.setProgress(0);
+        progressBarFadeIn.setVisibility(View.VISIBLE);
+
         //przygotowanie mediaPlayera do wystartowania
-        mediaPlayer.reset();
-        try {
-            mediaPlayer.setDataSource(this, Uri.parse("android.resource://" + getPackageName() + "/" + padResId));
-            mediaPlayer.prepare();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        mediaPlayer.setLooping(true);
-        mediaPlayer.seekTo(0);
-        mediaPlayer.start();
+        prepareMediaPlayerToStart(mediaPlayer, padResId);
 
         //właściwy runnable który robi Fade In
         if (mediaPlayer.isPlaying()) {
@@ -191,11 +171,13 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     if (volIn >= (currentVolume / (float) maxVolume)){
+                        progressBarFadeIn.setVisibility(View.INVISIBLE);
                         return; //zatrzymuje run() runnable
                     }
                  mediaPlayer.setVolume(volIn, volIn);
                  volIn = volIn + deltaVolume;
-                 h1.postDelayed(this, FADE_INTERVAL);
+                 hFadeIn.postDelayed(this, FADE_INTERVAL);
+                 setProgressOfBar(progressBarFadeIn, (int)((volIn / (currentVolume/(float)maxVolume))*100) );
                  tv1.setText((String.valueOf(volIn)));
 
                 }
@@ -204,7 +186,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void fadeOut(){
+    private void fadeOut(){
         final int FADE_DURATION = 12000;
         final int FADE_INTERVAL = 200;
         int numberOfSteps = FADE_DURATION/FADE_INTERVAL;
@@ -227,7 +209,7 @@ public class MainActivity extends AppCompatActivity {
                             playersList.get(j).reset();
                             return; //zatrzymuje run() runnable
                         }
-                        h2.postDelayed(this,FADE_INTERVAL);
+                        hFadeOut.postDelayed(this,FADE_INTERVAL);
                         tv2.setText((String.valueOf(volOut)));
                     }
                 };
@@ -239,14 +221,37 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    private void setProgressOfBar(final ProgressBar progressBar, final int progress){
+        progressBar.post(new Runnable() {
+            @Override
+            public void run() {
+                progressBar.setProgress(progress);
+            }
+        });
+    }
+
+    private void prepareMediaPlayerToStart(MediaPlayer mediaPlayer, int padResId){
+        //przygotowanie mediaPlayera do wystartowania
+        mediaPlayer.reset();
+        try {
+            mediaPlayer.setDataSource(this, Uri.parse("android.resource://" + getPackageName() + "/" + padResId));
+            mediaPlayer.prepare();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        mediaPlayer.setLooping(true);
+        mediaPlayer.seekTo(0);
+        mediaPlayer.start();
+    }
+
     //ustawia kolor wszystkich Buttonów w tablicy na 'unclicked'
-    public void setAllButtonsUnclicked(Button[] btnarr){
+    private void setAllButtonsUnclicked(Button[] btnarr){
         for (Button b: btnarr) {
             b.setBackgroundColor(getResources().getColor(R.color.unclicked));
         }
     }
     //ustawia wysztkie 'czyGra' na false
-    public void setAllMpplayingFalse(){
+    private void setAllMpplayingFalse(){
         for (int i = 0; i < mpplayingList.size();i++){
             mpplayingList.get(i).setPlayingX(false);
         }
@@ -277,7 +282,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void createAndStartClock() {
+    private void createAndStartClock() {
         final Runnable runnableClock = new Runnable() {
             @Override
             public void run() {

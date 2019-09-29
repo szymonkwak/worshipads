@@ -30,7 +30,9 @@
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+
+                />
         </LinearLayout>
 
         <LinearLayout
@@ -300,7 +302,7 @@
                 android:text="00:00"
                 android:textSize="@dimen/clock_txt_size"
                 android:textAlignment="center"
-                android:textColor="@color/colorAccent"
+                android:textColor="@color/colorPrimary"
                 android:keepScreenOn="true" />
         </LinearLayout>
 
