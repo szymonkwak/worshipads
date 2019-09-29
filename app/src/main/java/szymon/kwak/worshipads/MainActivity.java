@@ -8,8 +8,10 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
+import java.text.SimpleDateFormat;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -41,12 +43,20 @@ public class MainActivity extends AppCompatActivity {
 
     Handler h1 = new Handler();
     Handler h2 = new Handler();
+    Handler hClock = new Handler();
 
-    TextView tv1, tv2;
+    TextView textTime, tv1, tv2;
+
+    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+    long date;
+    String dateString;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getSupportActionBar().hide(); //ukryj TitleBar
         setContentView(R.layout.activity_main);
 
         //Zmiana koloru navigationBar'a
@@ -58,8 +68,9 @@ public class MainActivity extends AppCompatActivity {
         if (am != null) {
             maxVolume = am.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
 
+            textTime = findViewById(R.id.textTime);
+            createAndStartClock();
             creatempplayingList();
-
 
             Buttons[0] = findViewById(R.id.btnC);
             Buttons[1] = findViewById(R.id.btnDb);
@@ -74,24 +85,12 @@ public class MainActivity extends AppCompatActivity {
             Buttons[10] = findViewById(R.id.btnBb);
             Buttons[11] = findViewById(R.id.btnB);
 
-            mpC = new MediaPlayer();
-            mpDb = new MediaPlayer();
-            mpD = new MediaPlayer();
-            mpEb = new MediaPlayer();
-            mpE = new MediaPlayer();
-            mpF = new MediaPlayer();
-            mpGb = new MediaPlayer();
-            mpG = new MediaPlayer();
-            mpAb = new MediaPlayer();
-            mpA = new MediaPlayer();
-            mpAb = new MediaPlayer();
-            mpBb = new MediaPlayer();
-            mpB = new MediaPlayer();
-
+            mpC = new MediaPlayer(); mpDb = new MediaPlayer(); mpD = new MediaPlayer(); mpEb = new MediaPlayer();
+            mpE = new MediaPlayer(); mpF = new MediaPlayer(); mpGb = new MediaPlayer(); mpG = new MediaPlayer();
+            mpAb = new MediaPlayer(); mpA = new MediaPlayer(); mpBb = new MediaPlayer(); mpB = new MediaPlayer();
             playersList.add(mpC); playersList.add(mpDb); playersList.add(mpD); playersList.add(mpEb);
             playersList.add(mpE); playersList.add(mpF); playersList.add(mpGb); playersList.add(mpG);
             playersList.add(mpAb); playersList.add(mpA); playersList.add(mpBb); playersList.add(mpB);
-
 
             tv1 = findViewById(R.id.textView);
             tv2 = findViewById(R.id.textView2);
@@ -275,6 +274,21 @@ public class MainActivity extends AppCompatActivity {
     }
     public void btnEclick (View view){
         PlayStop(playingE,Buttons[4],mpE,R.raw.emaj);
+    }
+
+
+    public void createAndStartClock() {
+        final Runnable runnableClock = new Runnable() {
+            @Override
+            public void run() {
+                date = System.currentTimeMillis(); //Pobierz czas teraz
+                dateString = sdf.format(date); //Konwert long --do-- zadany przeze mnie format
+                textTime.setText(dateString); //Wyświetl
+                hClock.postDelayed(this, 60000); //Odczekaj 60 sek. i powtórz
+            }
+        };
+
+        runnableClock.run();
     }
 
 
