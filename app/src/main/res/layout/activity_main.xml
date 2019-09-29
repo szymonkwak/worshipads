@@ -49,50 +49,51 @@
 
             <Button
                 android:id="@+id/btnC"
+                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="180dp"
                 android:layout_height="100dp"
-
-
                 android:layout_weight="1"
+
                 android:background="@color/unclicked"
+                android:fontFamily="@font/louis_george_cafe"
                 android:onClick="btnCclick"
                 android:text="C"
                 android:textAllCaps="false"
-                android:textSize="@dimen/btn_txt_size"
-                style="?android:attr/borderlessButtonStyle"
+                android:textSize="@dimen/btn_larger_txt_size"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
                 android:id="@+id/btnDb"
+                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="180dp"
                 android:layout_height="100dp"
-
 
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_weight="1"
                 android:background="@color/unclicked"
+                android:fontFamily="@font/louis_george_cafe"
                 android:onClick="btnDbclick"
                 android:text="Db"
                 android:textAllCaps="false"
-                android:textSize="@dimen/btn_txt_size"
-                style="?android:attr/borderlessButtonStyle"
+                android:textSize="@dimen/btn_smaler_txt_size"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
                 android:id="@+id/btnD"
+                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="180dp"
                 android:layout_height="100dp"
 
                 android:layout_weight="1"
                 android:background="@color/unclicked"
+                android:fontFamily="@font/louis_george_cafe"
                 android:onClick="btnDclick"
                 android:text="D"
                 android:textAllCaps="false"
-                android:textSize="@dimen/btn_txt_size"
-                style="?android:attr/borderlessButtonStyle"
+                android:textSize="@dimen/btn_larger_txt_size"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/btnC" />
         </LinearLayout>
@@ -113,14 +114,14 @@
                 android:id="@+id/btnEb"
                 android:layout_width="180dp"
                 android:layout_height="100dp"
-
+                android:fontFamily="@font/louis_george_cafe"
 
                 android:layout_weight="1"
                 android:background="@color/unclicked"
                 android:onClick="btnEbclick"
                 android:text="Eb"
                 android:textAllCaps="false"
-                android:textSize="@dimen/btn_txt_size"
+                android:textSize="@dimen/btn_smaler_txt_size"
                 style="?android:attr/borderlessButtonStyle"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -129,7 +130,7 @@
                 android:id="@+id/btnE"
                 android:layout_width="180dp"
                 android:layout_height="100dp"
-
+                android:fontFamily="@font/louis_george_cafe"
 
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
@@ -137,7 +138,7 @@
                 android:background="@color/unclicked"
                 android:onClick="btnEclick"
                 android:text="E"
-                android:textSize="@dimen/btn_txt_size"
+                android:textSize="@dimen/btn_larger_txt_size"
                 style="?android:attr/borderlessButtonStyle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -146,13 +147,14 @@
                 android:id="@+id/btnF"
                 android:layout_width="180dp"
                 android:layout_height="100dp"
+                android:fontFamily="@font/louis_george_cafe"
 
                 android:layout_weight="1"
                 android:background="@color/unclicked"
                 android:onClick="btnFclick"
                 android:text="F"
                 android:textAllCaps="false"
-                android:textSize="@dimen/btn_txt_size"
+                android:textSize="@dimen/btn_larger_txt_size"
                 style="?android:attr/borderlessButtonStyle"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/btnC" />
@@ -174,14 +176,14 @@
                 android:id="@+id/btnGb"
                 android:layout_width="180dp"
                 android:layout_height="100dp"
-
+                android:fontFamily="@font/louis_george_cafe"
 
                 android:layout_weight="1"
                 android:background="@color/unclicked"
                 android:onClick="btnGbclick"
                 android:text="Gb"
                 android:textAllCaps="false"
-                android:textSize="@dimen/btn_txt_size"
+                android:textSize="@dimen/btn_smaler_txt_size"
                 style="?android:attr/borderlessButtonStyle"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -190,7 +192,7 @@
                 android:id="@+id/btnG"
                 android:layout_width="180dp"
                 android:layout_height="100dp"
-
+                android:fontFamily="@font/louis_george_cafe"
 
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
@@ -199,7 +201,7 @@
                 android:onClick="btnGclick"
                 android:text="G"
                 android:textAllCaps="false"
-                android:textSize="@dimen/btn_txt_size"
+                android:textSize="@dimen/btn_larger_txt_size"
                 style="?android:attr/borderlessButtonStyle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -208,13 +210,14 @@
                 android:id="@+id/btnAb"
                 android:layout_width="180dp"
                 android:layout_height="100dp"
+                android:fontFamily="@font/louis_george_cafe"
 
                 android:layout_weight="1"
                 android:background="@color/unclicked"
                 android:onClick="btnAbclick"
                 android:text="Ab"
                 android:textAllCaps="false"
-                android:textSize="@dimen/btn_txt_size"
+                android:textSize="@dimen/btn_smaler_txt_size"
                 style="?android:attr/borderlessButtonStyle"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/btnC" />
@@ -236,14 +239,14 @@
                 android:id="@+id/btnA"
                 android:layout_width="180dp"
                 android:layout_height="100dp"
-
+                android:fontFamily="@font/louis_george_cafe"
 
                 android:layout_weight="1"
                 android:background="@color/unclicked"
                 android:onClick="btnAclick"
                 android:text="A"
                 android:textAllCaps="false"
-                android:textSize="@dimen/btn_txt_size"
+                android:textSize="@dimen/btn_larger_txt_size"
                 style="?android:attr/borderlessButtonStyle"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -252,7 +255,7 @@
                 android:id="@+id/btnBb"
                 android:layout_width="180dp"
                 android:layout_height="100dp"
-
+                android:fontFamily="@font/louis_george_cafe"
 
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
@@ -261,7 +264,7 @@
                 android:onClick="btnBbclick"
                 android:text="Bb"
                 android:textAllCaps="false"
-                android:textSize="@dimen/btn_txt_size"
+                android:textSize="@dimen/btn_smaler_txt_size"
                 style="?android:attr/borderlessButtonStyle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -270,13 +273,15 @@
                 android:id="@+id/btnB"
                 android:layout_width="180dp"
                 android:layout_height="100dp"
+                android:fontFamily="@font/louis_george_cafe"
+
 
                 android:layout_weight="1"
                 android:background="@color/unclicked"
                 android:onClick="btnBclick"
                 android:text="B"
                 android:textAllCaps="false"
-                android:textSize="@dimen/btn_txt_size"
+                android:textSize="@dimen/btn_larger_txt_size"
                 style="?android:attr/borderlessButtonStyle"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/btnC" />
@@ -303,6 +308,7 @@
                 android:textSize="@dimen/clock_txt_size"
                 android:textAlignment="center"
                 android:textColor="@color/colorPrimary"
+                android:fontFamily="@font/louis_george_cafe"
                 android:keepScreenOn="true" />
         </LinearLayout>
 
