@@ -112,50 +112,50 @@
 
             <Button
                 android:id="@+id/btnEb"
+                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="180dp"
                 android:layout_height="100dp"
-                android:fontFamily="@font/louis_george_cafe"
 
                 android:layout_weight="1"
                 android:background="@color/unclicked"
+                android:fontFamily="@font/louis_george_cafe"
                 android:onClick="btnEbclick"
                 android:text="Eb"
                 android:textAllCaps="false"
                 android:textSize="@dimen/btn_smaler_txt_size"
-                style="?android:attr/borderlessButtonStyle"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
                 android:id="@+id/btnE"
+                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="180dp"
                 android:layout_height="100dp"
-                android:fontFamily="@font/louis_george_cafe"
 
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_weight="1"
                 android:background="@color/unclicked"
+                android:fontFamily="@font/louis_george_cafe"
                 android:onClick="btnEclick"
                 android:text="E"
                 android:textSize="@dimen/btn_larger_txt_size"
-                style="?android:attr/borderlessButtonStyle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
                 android:id="@+id/btnF"
+                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="180dp"
                 android:layout_height="100dp"
-                android:fontFamily="@font/louis_george_cafe"
 
                 android:layout_weight="1"
                 android:background="@color/unclicked"
+                android:fontFamily="@font/louis_george_cafe"
                 android:onClick="btnFclick"
                 android:text="F"
                 android:textAllCaps="false"
                 android:textSize="@dimen/btn_larger_txt_size"
-                style="?android:attr/borderlessButtonStyle"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/btnC" />
         </LinearLayout>
@@ -174,51 +174,51 @@
 
             <Button
                 android:id="@+id/btnGb"
+                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="180dp"
                 android:layout_height="100dp"
-                android:fontFamily="@font/louis_george_cafe"
 
                 android:layout_weight="1"
                 android:background="@color/unclicked"
+                android:fontFamily="@font/louis_george_cafe"
                 android:onClick="btnGbclick"
                 android:text="Gb"
                 android:textAllCaps="false"
                 android:textSize="@dimen/btn_smaler_txt_size"
-                style="?android:attr/borderlessButtonStyle"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
                 android:id="@+id/btnG"
+                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="180dp"
                 android:layout_height="100dp"
-                android:fontFamily="@font/louis_george_cafe"
 
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_weight="1"
                 android:background="@color/unclicked"
+                android:fontFamily="@font/louis_george_cafe"
                 android:onClick="btnGclick"
                 android:text="G"
                 android:textAllCaps="false"
                 android:textSize="@dimen/btn_larger_txt_size"
-                style="?android:attr/borderlessButtonStyle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
                 android:id="@+id/btnAb"
+                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="180dp"
                 android:layout_height="100dp"
-                android:fontFamily="@font/louis_george_cafe"
 
                 android:layout_weight="1"
                 android:background="@color/unclicked"
+                android:fontFamily="@font/louis_george_cafe"
                 android:onClick="btnAbclick"
                 android:text="Ab"
                 android:textAllCaps="false"
                 android:textSize="@dimen/btn_smaler_txt_size"
-                style="?android:attr/borderlessButtonStyle"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/btnC" />
         </LinearLayout>
@@ -237,52 +237,52 @@
 
             <Button
                 android:id="@+id/btnA"
+                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="180dp"
                 android:layout_height="100dp"
-                android:fontFamily="@font/louis_george_cafe"
 
                 android:layout_weight="1"
                 android:background="@color/unclicked"
+                android:fontFamily="@font/louis_george_cafe"
                 android:onClick="btnAclick"
                 android:text="A"
                 android:textAllCaps="false"
                 android:textSize="@dimen/btn_larger_txt_size"
-                style="?android:attr/borderlessButtonStyle"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
                 android:id="@+id/btnBb"
+                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="180dp"
                 android:layout_height="100dp"
-                android:fontFamily="@font/louis_george_cafe"
 
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_weight="1"
                 android:background="@color/unclicked"
+                android:fontFamily="@font/louis_george_cafe"
                 android:onClick="btnBbclick"
                 android:text="Bb"
                 android:textAllCaps="false"
                 android:textSize="@dimen/btn_smaler_txt_size"
-                style="?android:attr/borderlessButtonStyle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
                 android:id="@+id/btnB"
+                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="180dp"
                 android:layout_height="100dp"
-                android:fontFamily="@font/louis_george_cafe"
 
 
                 android:layout_weight="1"
                 android:background="@color/unclicked"
+                android:fontFamily="@font/louis_george_cafe"
                 android:onClick="btnBclick"
                 android:text="B"
                 android:textAllCaps="false"
                 android:textSize="@dimen/btn_larger_txt_size"
-                style="?android:attr/borderlessButtonStyle"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/btnC" />
         </LinearLayout>
@@ -304,27 +304,27 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="@font/louis_george_cafe"
+                android:keepScreenOn="true"
                 android:text="00:00"
-                android:textSize="@dimen/clock_txt_size"
                 android:textAlignment="center"
                 android:textColor="@color/colorPrimary"
-                android:fontFamily="@font/louis_george_cafe"
-                android:keepScreenOn="true" />
+                android:textSize="@dimen/clock_txt_size" />
         </LinearLayout>
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorAccent"
-            android:text="in" />
+            android:text="in"
+            android:textColor="@color/colorAccent" />
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorAccent"
-            android:text="out" />
+            android:text="out"
+            android:textColor="@color/colorAccent" />
     </LinearLayout>
 
 

@@ -13,6 +13,9 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 
 import java.io.IOException;
@@ -43,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
 
     Handler hFadeIn = new Handler();
     Handler hFadeOut = new Handler();
-    Handler hProgressB = new Handler();
     Handler hClock = new Handler();
 
     int maxVolume;
@@ -92,6 +94,10 @@ public class MainActivity extends AppCompatActivity {
             createAndStartClock();
             creatempplayingList();
 
+            progressBarFadeIn.setVisibility(View.INVISIBLE);
+
+
+
             Buttons[0] = findViewById(R.id.btnC);
             Buttons[1] = findViewById(R.id.btnDb);
             Buttons[2] = findViewById(R.id.btnD);
@@ -114,8 +120,6 @@ public class MainActivity extends AppCompatActivity {
 
             tv1 = findViewById(R.id.textView);
             tv2 = findViewById(R.id.textView2);
-
-
         }
     }
 
@@ -123,28 +127,33 @@ public class MainActivity extends AppCompatActivity {
 
     private void PlayStop (mpplaying mppl, Button b, MediaPlayer mediaPlayer, int padResId){
 
-        //mppl to "identyfikator" wciśniętego przycisku. Decyduje czy wykonuje się if czy else.
-
-        if (!mppl.isPlayingX()){
-            setAllMpplayingFalse(); //wszystkie 'czyGra' są false
-            mppl.setPlayingX(true); //tylko podany jest 'true'
-            setAllButtonsUnclicked(Buttons); //wszystkie przyciski są 'unclicked'
-            b.setBackgroundColor(getResources().getColor(R.color.clicked)); //tylko podany jest 'clicked'
-
-            fadeOut();
-
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();}
-
-            fadeIn(mediaPlayer,padResId);
-
+        if (progressBarFadeIn.getVisibility() == View.VISIBLE){
+            Toast.makeText(this,"Poczekaj ♫ Trwa wczytywanie PADa ♪",Toast.LENGTH_LONG).show();
         }
-        else {
-            mppl.setPlayingX(false);
-            fadeOut();
-            b.setBackgroundColor(getResources().getColor(R.color.unclicked));
+            else if (progressBarFadeIn.getVisibility() == View.INVISIBLE) {
+
+            //mppl to "identyfikator" wciśniętego przycisku. Decyduje czy wykonuje się if czy else.
+            if (!mppl.isPlayingX()) {
+                setAllMpplayingFalse(); //wszystkie 'czyGra' są false
+                mppl.setPlayingX(true); //tylko podany jest 'true'
+                setAllButtonsUnclicked(Buttons); //wszystkie przyciski są 'unclicked'
+                b.setBackgroundColor(getResources().getColor(R.color.clicked)); //tylko podany jest 'clicked'
+
+                fadeOut();
+
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                fadeIn(mediaPlayer, padResId);
+
+            } else {
+                mppl.setPlayingX(false);
+                fadeOut();
+                b.setBackgroundColor(getResources().getColor(R.color.unclicked));
+            }
         }
 
     }
@@ -283,7 +292,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void createAndStartClock() {
-        final Runnable runnableClock = new Runnable() {
+
+        new Thread(new Runnable() {
             @Override
             public void run() {
                 date = System.currentTimeMillis(); //Pobierz czas teraz
@@ -291,9 +301,7 @@ public class MainActivity extends AppCompatActivity {
                 textTime.setText(dateString); //Wyświetl
                 hClock.postDelayed(this, 60000); //Odczekaj 60 sek. i powtórz
             }
-        };
-
-        runnableClock.run();
+        }).start();
     }
 
 
