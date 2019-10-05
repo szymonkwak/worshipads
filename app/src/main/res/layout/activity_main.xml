@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/background_dark"
+    android:background="@color/background"
     tools:context=".MainActivity">
 
 
@@ -17,9 +17,8 @@
             android:id="@+id/linearLayout0"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginEnd="@dimen/smaller_margin"
+            android:layout_marginStart="@dimen/smaller_margin"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -28,20 +27,20 @@
             <ProgressBar
                 android:id="@+id/progressBarFadeIn"
                 style="?android:attr/progressBarStyleHorizontal"
+                android:background="@color/background"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-
                 />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/linearLayout1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginEnd="@dimen/smaller_margin"
+            android:layout_marginStart="@dimen/smaller_margin"
+            android:layout_marginBottom="@dimen/smaller_margin"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -50,10 +49,12 @@
             <Button
                 android:id="@+id/btnC"
                 style="?android:attr/borderlessButtonStyle"
-                android:layout_width="180dp"
-                android:layout_height="100dp"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
                 android:layout_weight="1"
 
+                android:layout_marginEnd="@dimen/smaller_margin"
+                android:layout_marginStart="@dimen/smaller_margin"
                 android:background="@color/unclicked"
                 android:fontFamily="@font/louis_george_cafe"
                 android:onClick="btnCclick"
@@ -66,11 +67,11 @@
             <Button
                 android:id="@+id/btnDb"
                 style="?android:attr/borderlessButtonStyle"
-                android:layout_width="180dp"
-                android:layout_height="100dp"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
 
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
+                android:layout_marginEnd="@dimen/smaller_margin"
+                android:layout_marginStart="@dimen/smaller_margin"
                 android:layout_weight="1"
                 android:background="@color/unclicked"
                 android:fontFamily="@font/louis_george_cafe"
@@ -84,9 +85,11 @@
             <Button
                 android:id="@+id/btnD"
                 style="?android:attr/borderlessButtonStyle"
-                android:layout_width="180dp"
-                android:layout_height="100dp"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
 
+                android:layout_marginEnd="@dimen/smaller_margin"
+                android:layout_marginStart="@dimen/smaller_margin"
                 android:layout_weight="1"
                 android:background="@color/unclicked"
                 android:fontFamily="@font/louis_george_cafe"
@@ -100,11 +103,12 @@
 
         <LinearLayout
             android:id="@+id/linearLayout2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginBottom="@dimen/smaller_margin"
+            android:layout_marginEnd="@dimen/smaller_margin"
+            android:layout_marginStart="@dimen/smaller_margin"
+            android:layout_marginTop="@dimen/smaller_margin"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -113,9 +117,11 @@
             <Button
                 android:id="@+id/btnEb"
                 style="?android:attr/borderlessButtonStyle"
-                android:layout_width="180dp"
-                android:layout_height="100dp"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
 
+                android:layout_marginEnd="@dimen/smaller_margin"
+                android:layout_marginStart="@dimen/smaller_margin"
                 android:layout_weight="1"
                 android:background="@color/unclicked"
                 android:fontFamily="@font/louis_george_cafe"
@@ -129,11 +135,11 @@
             <Button
                 android:id="@+id/btnE"
                 style="?android:attr/borderlessButtonStyle"
-                android:layout_width="180dp"
-                android:layout_height="100dp"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
 
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
+                android:layout_marginEnd="@dimen/smaller_margin"
+                android:layout_marginStart="@dimen/smaller_margin"
                 android:layout_weight="1"
                 android:background="@color/unclicked"
                 android:fontFamily="@font/louis_george_cafe"
@@ -146,9 +152,11 @@
             <Button
                 android:id="@+id/btnF"
                 style="?android:attr/borderlessButtonStyle"
-                android:layout_width="180dp"
-                android:layout_height="100dp"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
 
+                android:layout_marginEnd="@dimen/smaller_margin"
+                android:layout_marginStart="@dimen/smaller_margin"
                 android:layout_weight="1"
                 android:background="@color/unclicked"
                 android:fontFamily="@font/louis_george_cafe"
@@ -162,11 +170,12 @@
 
         <LinearLayout
             android:id="@+id/linearLayout3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginBottom="@dimen/smaller_margin"
+            android:layout_marginEnd="@dimen/smaller_margin"
+            android:layout_marginStart="@dimen/smaller_margin"
+            android:layout_marginTop="@dimen/smaller_margin"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -175,9 +184,11 @@
             <Button
                 android:id="@+id/btnGb"
                 style="?android:attr/borderlessButtonStyle"
-                android:layout_width="180dp"
-                android:layout_height="100dp"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
 
+                android:layout_marginEnd="@dimen/smaller_margin"
+                android:layout_marginStart="@dimen/smaller_margin"
                 android:layout_weight="1"
                 android:background="@color/unclicked"
                 android:fontFamily="@font/louis_george_cafe"
@@ -191,11 +202,11 @@
             <Button
                 android:id="@+id/btnG"
                 style="?android:attr/borderlessButtonStyle"
-                android:layout_width="180dp"
-                android:layout_height="100dp"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
 
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
+                android:layout_marginEnd="@dimen/smaller_margin"
+                android:layout_marginStart="@dimen/smaller_margin"
                 android:layout_weight="1"
                 android:background="@color/unclicked"
                 android:fontFamily="@font/louis_george_cafe"
@@ -209,9 +220,11 @@
             <Button
                 android:id="@+id/btnAb"
                 style="?android:attr/borderlessButtonStyle"
-                android:layout_width="180dp"
-                android:layout_height="100dp"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
 
+                android:layout_marginEnd="@dimen/smaller_margin"
+                android:layout_marginStart="@dimen/smaller_margin"
                 android:layout_weight="1"
                 android:background="@color/unclicked"
                 android:fontFamily="@font/louis_george_cafe"
@@ -225,11 +238,12 @@
 
         <LinearLayout
             android:id="@+id/linearLayout4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginBottom="@dimen/smaller_margin"
+            android:layout_marginEnd="@dimen/smaller_margin"
+            android:layout_marginStart="@dimen/smaller_margin"
+            android:layout_marginTop="@dimen/smaller_margin"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -238,9 +252,11 @@
             <Button
                 android:id="@+id/btnA"
                 style="?android:attr/borderlessButtonStyle"
-                android:layout_width="180dp"
-                android:layout_height="100dp"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
 
+                android:layout_marginEnd="@dimen/smaller_margin"
+                android:layout_marginStart="@dimen/smaller_margin"
                 android:layout_weight="1"
                 android:background="@color/unclicked"
                 android:fontFamily="@font/louis_george_cafe"
@@ -254,11 +270,11 @@
             <Button
                 android:id="@+id/btnBb"
                 style="?android:attr/borderlessButtonStyle"
-                android:layout_width="180dp"
-                android:layout_height="100dp"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
 
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
+                android:layout_marginEnd="@dimen/smaller_margin"
+                android:layout_marginStart="@dimen/smaller_margin"
                 android:layout_weight="1"
                 android:background="@color/unclicked"
                 android:fontFamily="@font/louis_george_cafe"
@@ -272,10 +288,11 @@
             <Button
                 android:id="@+id/btnB"
                 style="?android:attr/borderlessButtonStyle"
-                android:layout_width="180dp"
-                android:layout_height="100dp"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
 
-
+                android:layout_marginEnd="@dimen/smaller_margin"
+                android:layout_marginStart="@dimen/smaller_margin"
                 android:layout_weight="1"
                 android:background="@color/unclicked"
                 android:fontFamily="@font/louis_george_cafe"
@@ -291,9 +308,37 @@
             android:id="@+id/linearLayout5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/smaller_margin"
+            android:layout_marginEnd="@dimen/smaller_margin"
+            android:layout_marginStart="@dimen/smaller_margin">
+
+            <Button
+                android:id="@+id/btnStop"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+
+                android:layout_marginEnd="@dimen/smaller_margin"
+                android:layout_marginStart="@dimen/smaller_margin"
+                android:layout_weight="1"
+                android:background="@color/stop_button"
+                android:fontFamily="@font/louis_george_cafe"
+                android:onClick="btnStopClick"
+                android:text="Stop"
+                android:textAllCaps="false"
+                android:textSize="@dimen/btn_smaler_txt_size"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/smaller_margin"
+            android:layout_marginStart="@dimen/smaller_margin"
+            android:layout_marginBottom="@dimen/smaller_margin"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

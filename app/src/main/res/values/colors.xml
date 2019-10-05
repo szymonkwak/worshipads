@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#1b85b8</color>
+    <color name="colorPrimary">#7DCEA0</color>
     <color name="colorPrimaryDark">#2a4d69</color>
-    <color name="colorAccent">#d41243</color>
+    <color name="colorAccent">#CB4335</color>
+    <color name="background">#17202A</color>
+    <color name="stop_button">#1E8449</color>
     <color name="unclicked">#5875a7</color>
-    <color name="clicked">#d41243</color>
+    <color name="clicked">#CB4335</color>
 </resources>

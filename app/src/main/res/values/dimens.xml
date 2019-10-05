@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="btn_larger_txt_size">46sp</dimen>
-    <dimen name="btn_smaler_txt_size">36sp</dimen>
+    <dimen name="btn_larger_txt_size">50sp</dimen>
+    <dimen name="btn_smaler_txt_size">32sp</dimen>
     <dimen name="clock_txt_size">120sp</dimen>
+    <dimen name="smaller_margin">4dp</dimen>
+    <dimen name="bigger_margin">8dp</dimen>
 </resources>

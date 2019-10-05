@@ -5,9 +5,9 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
-import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -15,7 +15,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 
 import java.io.IOException;
@@ -23,6 +22,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
+    public static String PACKAGE_NAME;
+    public static final String TAG = "MainActivity";
+
+    PlayerObject playerC, playerDb, playerD, playerEb, playerE;
+
 
     mpplaying playingC = new mpplaying();
     mpplaying playingDb = new mpplaying();
@@ -42,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
     AudioManager am;
     MediaPlayer mpC, mpDb, mpD, mpEb, mpE, mpF, mpGb, mpG, mpAb, mpA, mpBb, mpB;
     List<MediaPlayer> playersList = new ArrayList<>();
+    List<PlayerObject> playersObjectList = new ArrayList<>();
 
 
     Handler hFadeIn = new Handler();
@@ -88,10 +94,18 @@ public class MainActivity extends AppCompatActivity {
         am = (AudioManager) getSystemService(AUDIO_SERVICE);
         if (am != null) {
             maxVolume = am.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+        }
+
+            PACKAGE_NAME = getPackageName(); //potrzebuję tego do określenia ścieżki PADa w PlayerObject - metoda prepareMediaPlayerToStart
 
             progressBarFadeIn = findViewById(R.id.progressBarFadeIn);
             textTime = findViewById(R.id.textTime);
             createAndStartClock();
+
+
+
+
+
             creatempplayingList();
 
             progressBarFadeIn.setVisibility(View.INVISIBLE);
@@ -120,42 +134,111 @@ public class MainActivity extends AppCompatActivity {
 
             tv1 = findViewById(R.id.textView);
             tv2 = findViewById(R.id.textView2);
-        }
+
+            playerC = new PlayerObject(mpC,Buttons[0],R.raw.cmaj,this);
+            playerD = new PlayerObject(mpD,Buttons[2],R.raw.dmaj,this);
+            playerE = new PlayerObject(mpE,Buttons[4],R.raw.emaj,this);
+
+            playersObjectList.add(playerC);
+            //playersObjectList.add(playerDb);
+            playersObjectList.add(playerD);
+            //playersObjectList.add(playerEb);
+            playersObjectList.add(playerE);
+
+
+
     }
 
 
 
-    private void PlayStop (mpplaying mppl, Button b, MediaPlayer mediaPlayer, int padResId){
+    private void PlayStop (PlayerObject playerX, List<PlayerObject> playerObjectList){
 
-        if (progressBarFadeIn.getVisibility() == View.VISIBLE){
+        // Lista playerObjectList jest potrzebna, żeby sprawdzić, czy nie trwa właśnie fadeIn albo fadeOut
+        // player X to podany do metody konkretny PlayerObject powiązany do przycisku
+
+        boolean fadingInProcess = false;
+
+        for (PlayerObject playerObj : playerObjectList) {
+            if (playerObj.isFadingOut() || playerObj.isFadingIn()){ //Sprawdzam czy którykolwiek gra
+                fadingInProcess = true;
+                break;
+            }
+        }
+
+        if (fadingInProcess){
             Toast.makeText(this,"Poczekaj ♫ Trwa wczytywanie PADa ♪",Toast.LENGTH_LONG).show();
         }
-            else if (progressBarFadeIn.getVisibility() == View.INVISIBLE) {
+        else if (!fadingInProcess){
 
-            //mppl to "identyfikator" wciśniętego przycisku. Decyduje czy wykonuje się if czy else.
-            if (!mppl.isPlayingX()) {
-                setAllMpplayingFalse(); //wszystkie 'czyGra' są false
-                mppl.setPlayingX(true); //tylko podany jest 'true'
-                setAllButtonsUnclicked(Buttons); //wszystkie przyciski są 'unclicked'
-                b.setBackgroundColor(getResources().getColor(R.color.clicked)); //tylko podany jest 'clicked'
+            if (playerX.isPlaying()){
+                Log.d(TAG, "PlayStop: Kliniety gra");
+                //Jeżeli kliknięty player gra, to:
+                playerX.fadeOut(am);
+                playerX.button.setBackgroundColor(getResources().getColor(R.color.unclicked));
+            }
+            else if (!playerX.isPlaying()){
+                setAllButtonsUnclicked(Buttons); //wszystkie przyciski ustaw jako 'unclicked'
+                playerX.button.setBackgroundColor(getResources().getColor(R.color.clicked)); //tylko podany zrób 'clicked'
 
-                fadeOut();
+                for (PlayerObject playerObj2 : playerObjectList) { //Znajdź czy którykolwiek gra i zrób z nim fadeOut
+                    if (playerObj2.isPlaying()){
+                        playerObj2.fadeOut(am);
+                        Log.d(TAG, "DO Fade OUT: " + playerObj2.button.toString());
+                        break;
+                    }
+                }
 
-                try {
+                try { //Poczekaj 500milsek
                     Thread.sleep(500);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
 
-                fadeIn(mediaPlayer, padResId);
-
-            } else {
-                mppl.setPlayingX(false);
-                fadeOut();
-                b.setBackgroundColor(getResources().getColor(R.color.unclicked));
+                playerX.fadeIn(am,progressBarFadeIn); //Wczytaj kliknięty player
+                Log.d(TAG, "PlayStop: fade in");
             }
         }
 
+
+/**
+        for (PlayerObject playerObj : playerObjectList){
+            if (playerObj.isFadingIn() || playerObj.isFadingOut()){
+                Toast.makeText(this,"Poczekaj ♫ Trwa wczytywanie PADa ♪",Toast.LENGTH_LONG).show();
+                break;
+            }
+            else if (!playerObj.isFadingIn() && !playerObj.isFadingOut()){
+
+                if (playerX.isPlaying()){
+                    Log.d(TAG, "PlayStop: Kliniety gra");
+                    //Jeżeli kliknięty player gra, to:
+                    playerX.fadeOut(am);
+                    playerX.button.setBackgroundColor(getResources().getColor(R.color.unclicked));
+                    break;
+                }
+
+                else if (!playerX.isPlaying()){
+                    //Jeżeli kliknięty player nie gra, to:
+
+                    setAllButtonsUnclicked(Buttons); //wszystkie przyciski ustaw jako 'unclicked'
+                    playerX.button.setBackgroundColor(getResources().getColor(R.color.clicked)); //tylko podany zrób 'clicked'
+
+                    for (PlayerObject playerObj2 : playerObjectList) { //Znajdź czy którykolwiek gra i zrób z nim fadeOut
+                        Log.d(TAG, "PlayStop: " + playerObj2.toString());
+                        playerObj2.fadeOut(am);
+                    }
+                    try { //Poczekaj 500milsek
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                    Log.d(TAG, "PlayStop: !isPlaying3");
+                    playerX.fadeIn(am,progressBarFadeIn); //Wczytaj kliknięty player
+                }
+            }
+
+        }
+        */
     }
 
     private void fadeIn(final MediaPlayer mediaPlayer, int padResId) {
@@ -266,28 +349,31 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
     public void btnCclick (View view){
-        PlayStop(playingC,Buttons[0],mpC,R.raw.cmaj);
+        PlayStop(playerC,playersObjectList);
     }
     public void btnDbclick (View view){
-        //  https://stackoverflow.com/questions/2969242/problems-with-mediaplayer-raw-resources-stop-and-start/4761482
-        mpD.reset();
-        try {
-            mpD.setDataSource(this, Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.dmaj));
-            mpD.prepare();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        mpD.setLooping(true);
-        mpD.seekTo(0);
-        mpD.start();
-        Buttons[1].setBackgroundColor(getResources().getColor(R.color.clicked));
+
     }
     public void btnDclick (View view){
-        PlayStop(playingD,Buttons[2],mpD,R.raw.dmaj);
+        PlayStop(playerD,playersObjectList);
     }
     public void btnEclick (View view){
-        PlayStop(playingE,Buttons[4],mpE,R.raw.emaj);
+        PlayStop(playerE,playersObjectList);
+    }
+
+    public void btnStopClick (View view){
+        for (int i = 0; i < playersList.size(); i++){
+            if (playersList.get(i).isPlaying()) {
+                playersList.get(i).stop();
+                playersList.get(i).reset();
+                setAllMpplayingFalse();
+                setAllButtonsUnclicked(Buttons);
+                progressBarFadeIn.setProgress(0);
+                progressBarFadeIn.setVisibility(View.INVISIBLE);
+            }
+        }
     }
 
 
