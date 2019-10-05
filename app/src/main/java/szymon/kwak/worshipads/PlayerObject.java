@@ -19,7 +19,7 @@ public class PlayerObject extends ContextWrapper {
     private MediaPlayer mediaPlayer;
     private int resPadId;
     private float volIn, volOut;
-    private boolean isFadingIn, isFadingOut;
+    private boolean fadingIn, fadingOut;
     Handler hFadeOut = new Handler(Looper.getMainLooper());
     Handler hFadeIn = new Handler(Looper.getMainLooper());
 
@@ -51,7 +51,7 @@ public class PlayerObject extends ContextWrapper {
             final Runnable runnable1 = new Runnable() {
                 @Override
                 public void run() {
-                    if (volIn >= (currentVolume / (float) maxVolume)) {
+                    if (volIn >= (currentVolume / (float) maxVolume) | fadingIn == false) {
                         progressBarFadeIn.setVisibility(View.INVISIBLE);
                         setFadingIn(false);
                         return; //zatrzymuje run() runnable
@@ -85,7 +85,7 @@ public class PlayerObject extends ContextWrapper {
                  public void run() {
                      mediaPlayer.setVolume(volOut, volOut);
                      volOut = volOut - deltaVolume;
-                     if (volOut <= 0) {
+                     if (volOut <= 0 | fadingOut == false) {
                          mediaPlayer.stop();
                          mediaPlayer.reset();
                          setFadingOut(false);
@@ -99,20 +99,24 @@ public class PlayerObject extends ContextWrapper {
     }
 
     public boolean isFadingIn(){
-        return isFadingIn;
+        return fadingIn;
     }
-    private void setFadingIn(boolean fadingIn) {
-        isFadingIn = fadingIn;
+    public void setFadingIn(boolean fadingIn) {
+        this.fadingIn = fadingIn;
     }
     public boolean isFadingOut() {
-        return isFadingOut;
+        return fadingOut;
     }
-    private void setFadingOut(boolean fadingOut) {
-        isFadingOut = fadingOut;
+    public void setFadingOut(boolean fadingOut) {
+        this.fadingOut = fadingOut;
     }
 
     public boolean isPlaying(){
         return mediaPlayer.isPlaying();
+    }
+    public void stopPlaying(){
+        mediaPlayer.stop();
+        mediaPlayer.reset();
     }
 
     private void prepareMediaPlayerToStart(MediaPlayer mediaPlayer, int padResId){

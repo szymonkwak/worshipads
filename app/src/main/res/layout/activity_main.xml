@@ -357,19 +357,6 @@
                 android:textSize="@dimen/clock_txt_size" />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="in"
-            android:textColor="@color/colorAccent" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="out"
-            android:textColor="@color/colorAccent" />
     </LinearLayout>
 
 
