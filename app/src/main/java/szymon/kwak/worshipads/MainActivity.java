@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static String PACKAGE_NAME;
 
-    PlayerObject playerC, playerDb, playerD, playerEb, playerE;
+    PlayerObject playerC, playerDb, playerD, playerEb, playerE, playerF, playerGb, playerG, playerAb, playerA, playerBb, playerB;
     List<PlayerObject> playersObjectList = new ArrayList<>();
 
     Button[] Buttons = new Button[12];
@@ -79,15 +79,31 @@ public class MainActivity extends AppCompatActivity {
         mpAb = new MediaPlayer(); mpA = new MediaPlayer(); mpBb = new MediaPlayer(); mpB = new MediaPlayer();
 
 
-        playerC = new PlayerObject(mpC,Buttons[0],R.raw.cmaj,this);
-        playerD = new PlayerObject(mpD,Buttons[2],R.raw.dmaj,this);
-        playerE = new PlayerObject(mpE,Buttons[4],R.raw.emaj,this);
+        playerC = new PlayerObject(mpC,Buttons[0],R.raw.c,this);
+        playerDb = new PlayerObject(mpDb,Buttons[1],R.raw.db,this);
+        playerD = new PlayerObject(mpD,Buttons[2],R.raw.d,this);
+        playerEb = new PlayerObject(mpEb,Buttons[3],R.raw.eb,this);
+        playerE = new PlayerObject(mpE,Buttons[4],R.raw.e,this);
+        playerF = new PlayerObject(mpF,Buttons[5],R.raw.f,this);
+        playerGb = new PlayerObject(mpGb,Buttons[6],R.raw.gb,this);
+        playerG = new PlayerObject(mpG,Buttons[7],R.raw.g,this);
+        playerAb = new PlayerObject(mpAb,Buttons[8],R.raw.ab,this);
+        playerA = new PlayerObject(mpA,Buttons[9],R.raw.a,this);
+        playerBb = new PlayerObject(mpBb,Buttons[10],R.raw.bb,this);
+        playerB = new PlayerObject(mpB,Buttons[11],R.raw.b,this);
 
         playersObjectList.add(playerC);
-        //playersObjectList.add(playerDb);
+        playersObjectList.add(playerDb);
         playersObjectList.add(playerD);
-        //playersObjectList.add(playerEb);
+        playersObjectList.add(playerEb);
         playersObjectList.add(playerE);
+        playersObjectList.add(playerF);
+        playersObjectList.add(playerGb);
+        playersObjectList.add(playerG);
+        playersObjectList.add(playerAb);
+        playersObjectList.add(playerA);
+        playersObjectList.add(playerBb);
+        playersObjectList.add(playerB);
 
     }
 
@@ -148,18 +164,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void btnCclick (View view){
-        PlayStop(playerC,playersObjectList);
-    }
-    public void btnDbclick (View view){
-
-    }
-    public void btnDclick (View view){
-        PlayStop(playerD,playersObjectList);
-    }
-    public void btnEclick (View view){
-        PlayStop(playerE,playersObjectList);
-    }
+    public void btnCclick (View view){PlayStop(playerC,playersObjectList);}
+    public void btnDbclick (View view){PlayStop(playerDb,playersObjectList);}
+    public void btnDclick (View view){PlayStop(playerD,playersObjectList);}
+    public void btnEbclick (View view){PlayStop(playerEb,playersObjectList);}
+    public void btnEclick (View view){PlayStop(playerE,playersObjectList);}
+    public void btnFclick (View view){PlayStop(playerF,playersObjectList);}
+    public void btnGbclick (View view){PlayStop(playerGb,playersObjectList);}
+    public void btnGclick (View view){PlayStop(playerG,playersObjectList);}
+    public void btnAbclick (View view){PlayStop(playerAb,playersObjectList);}
+    public void btnAclick (View view){PlayStop(playerA,playersObjectList);}
+    public void btnBbclick (View view){PlayStop(playerBb,playersObjectList);}
+    public void btnBclick (View view){PlayStop(playerB,playersObjectList);}
 
     public void btnStopClick (View view){
         for (PlayerObject playerObj : playersObjectList) {
