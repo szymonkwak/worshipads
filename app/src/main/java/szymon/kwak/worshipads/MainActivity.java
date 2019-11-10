@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
     long date;
     String dateString;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
         am = (AudioManager) getSystemService(AUDIO_SERVICE);
 
         //potrzebuję tego do określenia ścieżki PADa w PlayerObject - metoda prepareMediaPlayerToStart
-
         PACKAGE_NAME = getPackageName();
 
         progressBarFadeIn = findViewById(R.id.progressBarFadeIn);
@@ -109,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    private void PlayStop (PlayerObject playerX, List<PlayerObject> playerObjectList){
+    private void PlayStop (final PlayerObject playerX, List<PlayerObject> playerObjectList){
 
         // Lista playerObjectList jest potrzebna, żeby sprawdzić, czy nie trwa właśnie fadeIn albo fadeOut
         // player X to podany do metody konkretny PlayerObject powiązany do przycisku
@@ -117,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
         boolean fadingInProcess = false;
 
         for (PlayerObject playerObj : playerObjectList) {
-            if (playerObj.isFadingOut() || playerObj.isFadingIn()){ //Sprawdzam czy którykolwiek gra
+            if (playerObj.isFadingOut() || playerObj.isFadingIn()){ //Sprawdzam czy trwa fade
                 fadingInProcess = true;
                 break;
             }
@@ -137,20 +135,26 @@ public class MainActivity extends AppCompatActivity {
                 setAllButtonsUnclicked(Buttons); //wszystkie przyciski ustaw jako 'unclicked'
                 playerX.button.setBackgroundColor(getResources().getColor(R.color.clicked)); //tylko podany zrób 'clicked'
 
+                boolean playingInProgress = false;
+
                 for (PlayerObject playerObj2 : playerObjectList) { //Znajdź czy którykolwiek gra i zrób z nim fadeOut
                     if (playerObj2.isPlaying()){
                         playerObj2.fadeOut(am);
+
+                        playingInProgress = true;
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                playerX.fadeIn(am,progressBarFadeIn); //Zaczekaj 10sek i wczytaj kliknięty player
+                            }
+                        }, 10000);
                         break;
                     }
                 }
 
-                try { //Poczekaj 500milsek
-                    Thread.sleep(500);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                if (!playingInProgress){
+                    playerX.fadeIn(am,progressBarFadeIn); //Wczytaj kliknięty player
                 }
-
-                playerX.fadeIn(am,progressBarFadeIn); //Wczytaj kliknięty player
             }
         }
     }
